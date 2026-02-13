@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HealthController extends Controller
 {
@@ -84,4 +85,21 @@ class HealthController extends Controller
             
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
+
+    public function exportPdf() {
+    $user = auth()->user();
+    $logs = DB::table('health_logs')
+            ->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+    // Hitung data ringkasan untuk PDF
+    $latest = $logs->first();
+    $heightInMeters = $user->height / 100;
+    $bmi = $latest ? round($latest->weight / ($heightInMeters * $heightInMeters), 1) : null;
+
+    $pdf = Pdf::loadView('pdf.report', compact('user', 'logs', 'bmi'));
+    
+    return $pdf->download('VitalEdge_Report_' . $user->name . '.pdf');
+}
 }

@@ -30,7 +30,6 @@
                     <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-1.516-1.555-2.454a9.41 9.41 0 00-1.005-1.423z" clip-rule="evenodd"></path>
                 </svg>
             </div>
-            
             <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Target Energi</p>
             <h2 class="text-5xl font-bold text-orange-500">{{ number_format($calorieTarget) }} <span class="text-sm font-light text-gray-400">kkal</span></h2>
             <p class="text-[10px] text-gray-500 mt-3 uppercase tracking-widest italic text-opacity-50">Estimasi Maintenance</p>
@@ -49,14 +48,12 @@
                                 class="w-full bg-black border border-gray-700 p-4 rounded-xl text-white text-xl outline-none focus:border-cyan-500 transition"
                                 placeholder="0.0">
                         </div>
-                        
                         <div>
                             <label class="block text-cyan-500 text-[10px] uppercase font-bold mb-2 tracking-widest">Tinggi (CM)</label>
                             <input type="number" step="0.1" name="height" value="{{ auth()->user()->height }}" required 
                                 class="w-full bg-black border border-gray-700 p-4 rounded-xl text-white text-xl outline-none focus:border-cyan-500 transition">
                         </div>
                     </div>
-
                     <button type="submit" class="w-full bg-accent text-black py-4 rounded-xl font-black uppercase tracking-widest hover:bg-cyan-300 transition shadow-lg shadow-cyan-500/10">
                         Sinkronisasi Data Tubuh
                     </button>
@@ -70,10 +67,18 @@
         </div>
 
         <div class="bg-gray-900/30 p-8 rounded-2xl border border-gray-800 h-fit">
-            <h3 class="font-bold mb-6 uppercase text-sm flex items-center">
-                <span class="w-2 h-2 bg-cyan-500 rounded-full mr-2 shadow-[0_0_8px_#66fcf1]"></span>
-                Log Aktivitas Terbaru
-            </h3>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold uppercase text-sm flex items-center">
+                    <span class="w-2 h-2 bg-cyan-500 rounded-full mr-2 shadow-[0_0_8px_#66fcf1]"></span>
+                    Log Aktivitas Terbaru
+                </h3>
+                <a href="{{ route('export.pdf') }}" class="inline-flex items-center text-[9px] bg-white/5 border border-gray-700 px-3 py-1.5 rounded-lg hover:bg-cyan-500 hover:text-black transition-all duration-300 uppercase font-black tracking-widest group">
+                    <svg class="w-3 h-3 mr-1.5 text-cyan-500 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                    Unduh Report
+                </a>
+            </div>
             
             @if($logs->isEmpty())
                 <p class="text-gray-600 italic text-sm text-center py-10">Belum ada data biometrik tercatat.</p>
