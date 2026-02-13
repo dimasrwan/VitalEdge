@@ -3,7 +3,7 @@
 
 @section('content')
 <main class="max-w-6xl mx-auto px-6 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
         <div class="bg-gray-900/50 p-8 rounded-2xl neon-border text-center">
             <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Body Mass Index (BMI)</p>
             <h2 class="text-5xl font-bold accent-color">{{ $bmi ?? '--' }}</h2>
@@ -21,7 +21,19 @@
         <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800 text-center">
             <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Tinggi Badan Saat Ini</p>
             <h2 class="text-5xl font-bold text-white">{{ auth()->user()->height ?? '0' }} <span class="text-sm font-light">cm</span></h2>
-            <p class="text-[10px] text-gray-500 mt-3 uppercase tracking-widest italic">Sinkronisasi Otomatis Teraktifkan</p>
+            <p class="text-[10px] text-gray-500 mt-3 uppercase tracking-widest italic text-opacity-50">Parameter Statis</p>
+        </div>
+
+        <div class="bg-gray-900/50 p-8 rounded-2xl border border-gray-800 text-center relative overflow-hidden group">
+            <div class="absolute -right-2 -bottom-2 opacity-5 group-hover:opacity-10 transition-opacity duration-500">
+                <svg class="w-24 h-24 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-1.516-1.555-2.454a9.41 9.41 0 00-1.005-1.423z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            
+            <p class="text-xs text-gray-500 uppercase tracking-widest mb-2">Target Energi</p>
+            <h2 class="text-5xl font-bold text-orange-500">{{ number_format($calorieTarget) }} <span class="text-sm font-light text-gray-400">kkal</span></h2>
+            <p class="text-[10px] text-gray-500 mt-3 uppercase tracking-widest italic text-opacity-50">Estimasi Maintenance</p>
         </div>
     </div>
 
